@@ -1,0 +1,87 @@
+import streamlit as st
+import numpy as np
+import pandas as pd
+import time
+import random
+
+st.title("It's My First App Dude!")
+
+st.text("#My name is Azmi, i'm 18 yo, and i live in West Java, Bogor City")
+
+st.subheader("Table")
+
+st.table({
+   "First column": [1, 2, 3, 4],
+   "Second column": [10, 20, 30, 40]
+})
+
+
+st.subheader("Data Frame With Magic Funct")
+
+df = pd.DataFrame({
+   'Fisrt Column': [1, 2, 3, 4],
+   'Second Column': [10, 20, 30 ,40]
+})
+
+df
+
+
+st.subheader("Chart Data")
+
+chart_data = pd.DataFrame(
+   np.random.randn(20, 3),
+   columns = ['a',  'b', 'c']
+)
+
+st.line_chart(chart_data)
+
+st.subheader("Map")
+
+map_data = pd.DataFrame(
+   np.random.randn(1000, 2) / [50, 50] + [37.36, -122.4],
+   columns = ['lat', 'lon']
+)
+
+st.map(map_data)
+
+st.subheader("CheckBox")
+
+if st.checkbox('Show Dataframe'):
+   chart_data = pd.DataFrame(
+      np.random.randn(20, 3),
+      columns = ['a', 'b', 'c']
+   )
+   chart_data
+
+st.subheader("SelectBox")
+
+option = st.sidebar.selectbox(
+'Which number do you like best?', [1, 2, 3, 4])
+'You selected: ', option
+
+st.subheader("Lay Out Your App")
+
+left_column, right_column = st.beta_columns(2)
+pressed = left_column.button('Press me?')
+
+if pressed:
+   right_column.write('Wohhooo!')
+
+expander = st.beta_expander('FAQ')
+expander.write("Put you long explanation on here.....")
+
+
+'Starting a long computation...'
+
+# Add a placeholder
+latest_iteration = st.empty()
+bar = st.progress(0)
+
+for i in range(100):
+# Update the progress bar with each iteration.
+   latest_iteration.text(f'Iteration {i+1}')
+   bar.progress(i + 1)
+   time.sleep(0.1)
+
+'...and now we\'re done!'
+
